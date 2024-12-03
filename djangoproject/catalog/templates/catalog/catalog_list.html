@@ -1,0 +1,59 @@
+{% extends "bootstrap4/bootstrap4.html" %}
+
+{% load bootstrap4 %}
+
+{% block bootstrap4_content %}
+<div class="container">
+    <h1 class="mb-4">Catalog navigator</h1>
+
+    <form>
+        <div class="form-group form-row">
+            <div class="col-10">
+                <label for="search_query" class="col-form-label">
+                    Search for:
+                </label>
+                <input class="form-control" type="text" id="search_query"
+                       placeholder="Product title"
+                       name="query" value="{{ query }}">
+            </div>
+        </div>
+    </form>
+
+    <p><small>Results found: {{ products|length }}</small></p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>SKU</th>
+            <th>Category</th>
+            <th>Model</th>
+            <th>Manufacturer</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price (€)</th>
+            <th>Stock</th>
+            <th>Purchases</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% for product in products %} {{n}}
+                <tr>
+                    <td><img src="{{ product.image }}" height="60" width="60"/></td>
+                    <td>{{ product.sku }}</td>
+                    <td>{{ product.model.category.category_parent.title }} / {{ product.model.category.title }}</td>
+                    <td><img src="{{ product.model.manufacturer.image }}" alt='{{ product.model.manufacturer.sku }}' height="60" width="60"/></td>
+                    <td>{{ product.model.manufacturer.title }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>{{ product.num_purchases }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "store-catalog"
+version = "0.1.0"
+description = ""
+authors = ["Víctor Sánchez <victorsm156548@outlook.es>"]
+readme = "README.md"
+packages = [
+    { include = "store_catalog" },
+    { include = "djangoproject" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+typesense = "^0.21.0"
+django = "^5.1.3"
+pydantic = "^2.10.2"
+dependency-injector = "^4.43.0"
+django-bootstrap4 = "^24.4"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.13.0"
+flake8 = "^7.1.1"
+flake8-pyproject = "^1.2.3"
+django-stubs = {extras = ["compatible-mypy"], version = "^5.1.1"}
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+mypy_path = "store-catalog"
+disallow_untyped_defs = true
+explicit_package_bases = true
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "djangoproject.django_project.settings"
+strict_settings = false
+
+[mypy_django_plugin]
+ignore_missing_model_attributes = true
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 10
