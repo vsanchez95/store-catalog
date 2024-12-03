@@ -69,8 +69,7 @@ python djangoproject/manage.py migrate
 python djangoproject/manage.py runserver 0.0.0.0:80
 ```
 
-## DEV check it
-[Catalog navigator](http://localhost)
+Check it: [Catalog navigator](http://localhost)
 
 
 ## Notes
