@@ -40,10 +40,10 @@
         <tbody>
             {% for product in products %} {{n}}
                 <tr>
-                    <td><img src="{{ product.image }}" height="60" width="60"/></td>
+                    <td><img src="{{ product.image_url }}" height="60" width="60"/></td>
                     <td>{{ product.sku }}</td>
                     <td>{{ product.model.category.category_parent.title }} / {{ product.model.category.title }}</td>
-                    <td><img src="{{ product.model.manufacturer.image }}" alt='{{ product.model.manufacturer.sku }}' height="60" width="60"/></td>
+                    <td><img src="{{ product.model.manufacturer.image_url }}" alt='{{ product.model.manufacturer.sku }}' height="60" width="60"/></td>
                     <td>{{ product.model.manufacturer.title }}</td>
                     <td>{{ product.title }}</td>
                     <td>{{ product.description }}</td>

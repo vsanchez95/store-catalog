@@ -20,14 +20,14 @@ class ProductManufacturer(BaseModel):
     Attributes:
         id_ (str): manufacturer ID.
         title (str): title of manufacturer (unique).
-        image (HttpUrl): image URL of manufacturer.
+        image_url (HttpUrl): image URL of manufacturer.
     """
 
     model_config = ConfigDict(populate_by_name=True)
 
     id_: Annotated[int, Field(alias='id')]
     title: Annotated[str, StringConstraints(min_length=1)]
-    image: HttpUrl
+    image_url: HttpUrl
 
 
 class ProductCategory(BaseModel):
@@ -49,13 +49,13 @@ class ProductCategory(BaseModel):
 
 
 class ProductModel(BaseModel):
-    """Model domain model class.
+    """Product model domain model class.
 
     Attributes:
         sku (str): stock-keeping unit. It is a unique identifier.
         title (str): product title.
         description (str): product model description.
-        image (HttpUrl): product model image URL.
+        image_url (HttpUrl): product model image URL.
         category (ProductCategory): product model category (it is always a subcategory).
         manufacturer (ProductManufacturer): product model manufacturer.
         min_price (float): min product model price in euros.
@@ -64,7 +64,7 @@ class ProductModel(BaseModel):
     sku: Annotated[str, StringConstraints(min_length=1)]
     title: Annotated[str, StringConstraints(min_length=1)]
     description: Annotated[str, StringConstraints(min_length=1)]
-    image: HttpUrl
+    image_url: HttpUrl
     category: ProductCategory
     manufacturer: ProductManufacturer
     min_price: float
@@ -77,7 +77,7 @@ class Product(BaseModel):
         sku (str): stock-keeping unit. It is a unique identifier.
         title (str): product title.
         description (str): product description.
-        image (HttpUrl): product image URL.
+        image_url (HttpUrl): product image URL.
         price (float): product price in euros.
         model (Model): product model.
         stock (bool): True if product in stock else False.
@@ -86,7 +86,7 @@ class Product(BaseModel):
     sku: Annotated[str, StringConstraints(min_length=1)]
     title: Annotated[str, StringConstraints(min_length=1)]
     description: Annotated[str, StringConstraints(min_length=1)]
-    image: HttpUrl
+    image_url: HttpUrl
     price: float
     model: ProductModel
     stock: bool

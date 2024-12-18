@@ -66,13 +66,13 @@ class TypesenseProductRepository(AbstractProductRepository):
             sku=product_document['sku'],
             title=product_document['title'],
             description=product_document['description'],
-            image=product_document['image_url'],
+            image_url=product_document['image_url'],
             price=product_document['price'],
             model=ProductModel(
                 sku=product_document['product_models']['sku'],
                 title=product_document['product_models']['title'],
                 description=product_document['product_models']['description'],
-                image=product_document['product_models']['image_url'],
+                image_url=product_document['product_models']['image_url'],
                 min_price=product_document['product_models']['min_price'],
                 category=ProductCategory(
                     id_=product_document['product_models']['product_categories']['id'],
@@ -94,11 +94,11 @@ class TypesenseProductRepository(AbstractProductRepository):
                 manufacturer=ProductManufacturer(
                     id_=product_document['product_models']['product_manufacturers']['id'],
                     title=product_document['product_models']['product_manufacturers']['title'],
-                    image=product_document['product_models']['product_manufacturers']['image_url'],
+                    image_url=product_document['product_models']['product_manufacturers']['image_url'],
                 ),
             ),
             stock=product_document['stock'],
-            num_purchases=0,
+            num_purchases=product_document['num_purchases'],
         )
 
     def get(self, sku: str) -> Product | None:

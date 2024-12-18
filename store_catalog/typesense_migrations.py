@@ -1,25 +1,10 @@
-import os
-from json import loads as json_loads
-
-from djangoproject.django_project.settings import TYPESENSE_API_KEY
-from djangoproject.django_project.settings import TYPESENSE_HOST
-from djangoproject.django_project.settings import TYPESENSE_PORT
-from djangoproject.django_project.settings import TYPESENSE_PROTOCOL
+from djangoproject.django_project import container
 from store_catalog.adapters.typesense_database import TypesenseDatabase
-from store_catalog.container import Container
 
-CATALOG_DIR_PATH: str = os.getenv('CATALOG_DIR_PATH', '.')
+typesense_database: TypesenseDatabase = container.typesense_database()
 
-container: Container = Container()
 
-typense_database: TypesenseDatabase = container.typesense_database(
-    api_key=TYPESENSE_API_KEY,
-    host=TYPESENSE_HOST,
-    port=TYPESENSE_PORT,
-    protocol=TYPESENSE_PROTOCOL,
-)
-
-with typense_database.session() as session:
+with typesense_database.session() as session:
     # Create collections
     # Product Manufacturers
     session.collections.create({
@@ -86,47 +71,6 @@ with typense_database.session() as session:
                 'reference': 'product_models.id',
             },
             {'name': 'stock', 'type': 'bool'},
-            {'name': 'num_reviews', 'type': 'int32'},
+            {'name': 'num_purchases', 'type': 'int32'},
         ],
     })
-
-    # Index documents
-    product_manufacturers: list[dict] = []
-    product_categories: list[dict] = []
-    product_subcategories: list[dict] = []
-    product_models: list[dict] = []
-    products: list[dict] = []
-
-    # Product Manufacturers
-    with open(os.path.join(CATALOG_DIR_PATH, 'product_manufactures.jsonl')) as infile:
-        for json_line in infile:
-            product_manufacturers.append(json_loads(json_line))
-
-    session.collections['product_manufacturers'].documents.import_(product_manufacturers)
-
-    # Product Categories and Subcategories
-    with open(os.path.join(CATALOG_DIR_PATH, 'product_categories.jsonl')) as infile:
-        for json_line in infile:
-            product_categories.append(json_loads(json_line))
-
-    session.collections['product_categories'].documents.import_(product_categories)
-
-    with open(os.path.join(CATALOG_DIR_PATH, 'product_subcategories.jsonl')) as infile:
-        for json_line in infile:
-            product_subcategories.append(json_loads(json_line))
-
-    session.collections['product_categories'].documents.import_(product_subcategories)
-
-    # Product Models
-    with open(os.path.join(CATALOG_DIR_PATH, 'product_models.jsonl')) as infile:
-        for json_line in infile:
-            product_models.append(json_loads(json_line))
-
-    session.collections['product_models'].documents.import_(product_models)
-
-    # Products
-    with open(os.path.join(CATALOG_DIR_PATH, 'products.jsonl')) as infile:
-        for json_line in infile:
-            products.append(json_loads(json_line))
-
-    session.collections['products'].documents.import_(products)

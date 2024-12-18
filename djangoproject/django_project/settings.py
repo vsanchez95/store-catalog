@@ -130,7 +130,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Typesense sttings
-TYPESENSE_API_KEY = os.getenv('TYPESENSE_API_KEY', 'abcd')
-TYPESENSE_HOST = os.getenv('TYPESENSE_HOST', 'localhost')
-TYPESENSE_PORT = os.getenv('TYPESENSE_PORT', '8108')
-TYPESENSE_PROTOCOL = os.getenv('TYPESENSE_PORT', 'http')
+TYPESENSE_API_KEY = os.getenv('TYPESENSE_API_KEY')
+TYPESENSE_HOST = os.getenv('TYPESENSE_HOST')
+TYPESENSE_PORT = os.getenv('TYPESENSE_PORT')
+TYPESENSE_PROTOCOL = os.getenv('TYPESENSE_PROTOCOL')

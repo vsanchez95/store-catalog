@@ -1,4 +1,19 @@
 services:
+
+  store_catalog:
+    build: .
+    restart: always
+    depends_on:
+      - typesense
+    environment:
+      - TYPESENSE_API_KEY=abcd
+      - TYPESENSE_HOST=typesense
+      - TYPESENSE_PORT=8108
+      - TYPESENSE_PROTOCOL=http
+    ports:
+      - 80:8000
+
+
   typesense:
     image: typesense/typesense:27.1
     restart: on-failure

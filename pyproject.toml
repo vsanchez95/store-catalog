@@ -23,6 +23,7 @@ mypy = "^1.13.0"
 flake8 = "^7.1.1"
 flake8-pyproject = "^1.2.3"
 django-stubs = {extras = ["compatible-mypy"], version = "^5.1.1"}
+types-requests = "^2.32.0.20241016"
 
 
 [tool.poetry.group.test.dependencies]
