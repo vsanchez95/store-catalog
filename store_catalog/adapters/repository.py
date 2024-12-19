@@ -5,9 +5,9 @@ This module define a layer of abstraction around search engine access.
 
 from abc import ABC
 from abc import abstractmethod
+from collections.abc import Callable
 from contextlib import AbstractContextManager
 from typing import Any
-from typing import Callable
 
 from typesense import Client as TypesenseClient  # type: ignore
 
