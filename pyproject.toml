@@ -47,5 +47,5 @@ strict_settings = false
 ignore_missing_model_attributes = true
 
 [tool.flake8]
-max-line-length = 120
+max-line-length = 127
 max-complexity = 10
